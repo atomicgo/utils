@@ -1,9 +1,28 @@
-package utils
+package utils_test
 
-import "testing"
+import (
+	"atomicgo.dev/utils"
+	"fmt"
+)
 
-func TestHelloWorld(t *testing.T) {
-	if HelloWorld() != "Hello, World!" {
-		t.Fatal("Not equal")
-	}
+func ExampleTernary() {
+	fmt.Println(utils.Ternary(true, "a", "b"))
+	fmt.Println(utils.Ternary(false, "a", "b"))
+
+	// Output:
+	// a
+	// b
+}
+
+func ExamplePrettyJSON() {
+	person := Person{Name: "John Doe", Age: 42}
+	json, _ := utils.ToJSON(person)
+	prettyJson, _ := utils.PrettyJSON(json)
+	fmt.Println(prettyJson)
+
+	// Output:
+	// {
+	//   "Name": "John Doe",
+	//   "Age": 42
+	// }
 }
