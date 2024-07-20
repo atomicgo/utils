@@ -3,6 +3,7 @@ package utils
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -27,7 +28,7 @@ func PrettyJSON(inputJSON string, indent ...string) (string, error) {
 
 	err := json.Indent(&out, []byte(inputJSON), "", indent[0])
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("failed to pretty-print JSON: %w", err)
 	}
 
 	return out.String(), nil
@@ -35,9 +36,9 @@ func PrettyJSON(inputJSON string, indent ...string) (string, error) {
 
 // Fetch returns the body of a GET request to the given URL.
 func Fetch(url string) (string, error) {
-	resp, err := http.Get(url)
+	resp, err := http.Get(url) //nolint: gosec
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("failed to fetch URL: %w", err)
 	}
 
 	defer resp.Body.Close()
@@ -46,7 +47,7 @@ func Fetch(url string) (string, error) {
 
 	_, err = buf.ReadFrom(resp.Body)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("failed to read response body: %w", err)
 	}
 
 	return buf.String(), nil
