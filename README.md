@@ -97,7 +97,7 @@ Package utils is a collection of useful, quickly accessible utility functions.
 - [func PrettyJSON\(inputJSON string, indent ...string\) \(string, error\)](<#PrettyJSON>)
 - [func ReadFile\(path string\) \(string, error\)](<#ReadFile>)
 - [func Ternary\[T any\]\(condition bool, a, b T\) T](<#Ternary>)
-- [func ToInt\[T string | constraints.Number\]\(v T\) int](<#ToInt>)
+- [func ToInt\[T string | constraints.Number\]\(value T\) int](<#ToInt>)
 - [func ToJSON\(v any\) \(string, error\)](<#ToJSON>)
 - [func ToPrettyJSON\(v any, indent ...string\) \(string, error\)](<#ToPrettyJSON>)
 - [func ToString\(v any\) string](<#ToString>)
@@ -105,7 +105,7 @@ Package utils is a collection of useful, quickly accessible utility functions.
 
 
 <a name="AppendToFile"></a>
-## func [AppendToFile](<https://github.com/atomicgo/utils/blob/main/file.go#L27>)
+## func [AppendToFile](<https://github.com/atomicgo/utils/blob/main/file.go#L33>)
 
 ```go
 func AppendToFile[T string | []byte](path string, content T) error
@@ -114,7 +114,7 @@ func AppendToFile[T string | []byte](path string, content T) error
 AppendToFile appends the given content to the given file. Accepts a string or a byte slice.
 
 <a name="DownloadFile"></a>
-## func [DownloadFile](<https://github.com/atomicgo/utils/blob/main/file.go#L49>)
+## func [DownloadFile](<https://github.com/atomicgo/utils/blob/main/file.go#L55>)
 
 ```go
 func DownloadFile(url, path string) error
@@ -123,7 +123,7 @@ func DownloadFile(url, path string) error
 DownloadFile downloads the given URL to the given path. If the file already exists, it will be overwritten.
 
 <a name="Fetch"></a>
-## func [Fetch](<https://github.com/atomicgo/utils/blob/main/utils.go#L34>)
+## func [Fetch](<https://github.com/atomicgo/utils/blob/main/utils.go#L38>)
 
 ```go
 func Fetch(url string) (string, error)
@@ -132,7 +132,7 @@ func Fetch(url string) (string, error)
 Fetch returns the body of a GET request to the given URL.
 
 <a name="FileExists"></a>
-## func [FileExists](<https://github.com/atomicgo/utils/blob/main/file.go#L42>)
+## func [FileExists](<https://github.com/atomicgo/utils/blob/main/file.go#L48>)
 
 ```go
 func FileExists(path string) bool
@@ -141,7 +141,7 @@ func FileExists(path string) bool
 FileExists returns true if the given file exists.
 
 <a name="PrettyJSON"></a>
-## func [PrettyJSON](<https://github.com/atomicgo/utils/blob/main/utils.go#L20>)
+## func [PrettyJSON](<https://github.com/atomicgo/utils/blob/main/utils.go#L22>)
 
 ```go
 func PrettyJSON(inputJSON string, indent ...string) (string, error)
@@ -156,8 +156,8 @@ PrettyJSON returns a pretty\-printed JSON string. If indent is not provided, it 
 ```go
 person := Person{Name: "John Doe", Age: 42}
 json, _ := utils.ToJSON(person)
-prettyJson, _ := utils.PrettyJSON(json)
-fmt.Println(prettyJson)
+prettyJSON, _ := utils.PrettyJSON(json)
+fmt.Println(prettyJSON)
 
 // Output:
 // {
@@ -187,7 +187,7 @@ func ReadFile(path string) (string, error)
 ReadFile reads the given file and returns its content.
 
 <a name="Ternary"></a>
-## func [Ternary](<https://github.com/atomicgo/utils/blob/main/utils.go#L11>)
+## func [Ternary](<https://github.com/atomicgo/utils/blob/main/utils.go#L12>)
 
 ```go
 func Ternary[T any](condition bool, a, b T) T
@@ -203,8 +203,9 @@ Ternary is a ternary operator. It returns a if the condition is true, otherwise 
 package main
 
 import (
-	"atomicgo.dev/utils"
 	"fmt"
+
+	"atomicgo.dev/utils"
 )
 
 func main() {
@@ -224,10 +225,10 @@ b
 
 
 <a name="ToInt"></a>
-## func [ToInt](<https://github.com/atomicgo/utils/blob/main/to.go#L39>)
+## func [ToInt](<https://github.com/atomicgo/utils/blob/main/to.go#L42>)
 
 ```go
-func ToInt[T string | constraints.Number](v T) int
+func ToInt[T string | constraints.Number](value T) int
 ```
 
 ToInt converts the given value to an int. If the value is a float, it will be rounded to the nearest integer. \(Rounds up if the decimal is 0.5 or higher\)
@@ -240,8 +241,9 @@ ToInt converts the given value to an int. If the value is a float, it will be ro
 package main
 
 import (
-	"atomicgo.dev/utils"
 	"fmt"
+
+	"atomicgo.dev/utils"
 )
 
 func main() {
@@ -273,7 +275,7 @@ func main() {
 
 
 <a name="ToJSON"></a>
-## func [ToJSON](<https://github.com/atomicgo/utils/blob/main/to.go#L12>)
+## func [ToJSON](<https://github.com/atomicgo/utils/blob/main/to.go#L13>)
 
 ```go
 func ToJSON(v any) (string, error)
@@ -289,8 +291,9 @@ ToJSON converts the given value to a JSON string.
 package main
 
 import (
-	"atomicgo.dev/utils"
 	"fmt"
+
+	"atomicgo.dev/utils"
 )
 
 type Person struct {
@@ -299,7 +302,7 @@ type Person struct {
 }
 
 func main() {
-	var person = Person{"John Doe", 42}
+	person := Person{"John Doe", 42}
 
 	json, _ := utils.ToJSON(person)
 	fmt.Println(json)
@@ -316,7 +319,7 @@ func main() {
 
 
 <a name="ToPrettyJSON"></a>
-## func [ToPrettyJSON](<https://github.com/atomicgo/utils/blob/main/to.go#L20>)
+## func [ToPrettyJSON](<https://github.com/atomicgo/utils/blob/main/to.go#L22>)
 
 ```go
 func ToPrettyJSON(v any, indent ...string) (string, error)
@@ -332,8 +335,9 @@ func ToPrettyJSON(v any, indent ...string) (string, error)
 package main
 
 import (
-	"atomicgo.dev/utils"
 	"fmt"
+
+	"atomicgo.dev/utils"
 )
 
 type Person struct {
@@ -343,8 +347,8 @@ type Person struct {
 
 func main() {
 	person := Person{Name: "John Doe", Age: 42}
-	prettyJson, _ := utils.ToPrettyJSON(person)
-	fmt.Println(prettyJson)
+	prettyJSON, _ := utils.ToPrettyJSON(person)
+	fmt.Println(prettyJSON)
 
 }
 ```
@@ -361,7 +365,7 @@ func main() {
 
 
 <a name="ToString"></a>
-## func [ToString](<https://github.com/atomicgo/utils/blob/main/to.go#L33>)
+## func [ToString](<https://github.com/atomicgo/utils/blob/main/to.go#L36>)
 
 ```go
 func ToString(v any) string
@@ -377,8 +381,9 @@ ToString converts the given value to a string.
 package main
 
 import (
-	"atomicgo.dev/utils"
 	"fmt"
+
+	"atomicgo.dev/utils"
 )
 
 type Person struct {
@@ -403,7 +408,7 @@ func main() {
 
 
 <a name="WriteFile"></a>
-## func [WriteFile](<https://github.com/atomicgo/utils/blob/main/file.go#L21>)
+## func [WriteFile](<https://github.com/atomicgo/utils/blob/main/file.go#L22>)
 
 ```go
 func WriteFile[T string | []byte](path string, content T) error
