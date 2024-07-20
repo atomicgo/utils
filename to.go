@@ -14,6 +14,7 @@ func ToJSON(v any) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	return string(r), nil
 }
 
@@ -26,6 +27,7 @@ func ToPrettyJSON(v any, indent ...string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	return string(r), nil
 }
 

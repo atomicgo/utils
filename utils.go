@@ -12,6 +12,7 @@ func Ternary[T any](condition bool, a, b T) T {
 	if condition {
 		return a
 	}
+
 	return b
 }
 
@@ -19,6 +20,7 @@ func Ternary[T any](condition bool, a, b T) T {
 // If indent is not provided, it defaults to "  " (two spaces).
 func PrettyJSON(inputJSON string, indent ...string) (string, error) {
 	var out bytes.Buffer
+
 	if len(indent) == 0 {
 		indent = append(indent, "  ")
 	}
@@ -27,6 +29,7 @@ func PrettyJSON(inputJSON string, indent ...string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	return out.String(), nil
 }
 
@@ -40,6 +43,7 @@ func Fetch(url string) (string, error) {
 	defer resp.Body.Close()
 
 	var buf bytes.Buffer
+
 	_, err = buf.ReadFrom(resp.Body)
 	if err != nil {
 		return "", err
