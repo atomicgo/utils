@@ -1,8 +1,9 @@
 package utils_test
 
 import (
-	"atomicgo.dev/utils"
 	"fmt"
+
+	"atomicgo.dev/utils"
 )
 
 func ExampleTernary() {
@@ -17,8 +18,8 @@ func ExampleTernary() {
 func ExamplePrettyJSON() {
 	person := Person{Name: "John Doe", Age: 42}
 	json, _ := utils.ToJSON(person)
-	prettyJson, _ := utils.PrettyJSON(json)
-	fmt.Println(prettyJson)
+	prettyJSON, _ := utils.PrettyJSON(json)
+	fmt.Println(prettyJSON)
 
 	// Output:
 	// {
