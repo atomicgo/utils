@@ -1,8 +1,9 @@
 package utils_test
 
 import (
-	"atomicgo.dev/utils"
 	"fmt"
+
+	"atomicgo.dev/utils"
 )
 
 type Person struct {
@@ -11,7 +12,7 @@ type Person struct {
 }
 
 func ExampleToJSON() {
-	var person = Person{"John Doe", 42}
+	person := Person{"John Doe", 42}
 
 	json, _ := utils.ToJSON(person)
 	fmt.Println(json)
@@ -52,8 +53,8 @@ func ExampleToString() {
 
 func ExampleToPrettyJSON() {
 	person := Person{Name: "John Doe", Age: 42}
-	prettyJson, _ := utils.ToPrettyJSON(person)
-	fmt.Println(prettyJson)
+	prettyJSON, _ := utils.ToPrettyJSON(person)
+	fmt.Println(prettyJSON)
 
 	// Output:
 	// {
