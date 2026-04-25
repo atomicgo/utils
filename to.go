@@ -19,6 +19,7 @@ func ToJSON(v any) (string, error) {
 	return string(r), nil
 }
 
+// ToPrettyJSON converts the given value to an indented JSON string.
 func ToPrettyJSON(v any, indent ...string) (string, error) {
 	if len(indent) == 0 {
 		indent = append(indent, "  ")
@@ -52,7 +53,7 @@ func ToInt[T string | constraints.Number](value T) int {
 	case int64:
 		return int(value)
 	case uint:
-		return int(value)
+		return int(value) //nolint:gosec // Preserve existing conversion semantics.
 	case uint8:
 		return int(value)
 	case uint16:
@@ -60,7 +61,7 @@ func ToInt[T string | constraints.Number](value T) int {
 	case uint32:
 		return int(value)
 	case uint64:
-		return int(value)
+		return int(value) //nolint:gosec // Preserve existing conversion semantics.
 	case float32:
 		value += 0.5
 		return int(value)

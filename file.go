@@ -9,7 +9,7 @@ import (
 
 // ReadFile reads the given file and returns its content.
 func ReadFile(path string) (string, error) {
-	res, err := os.ReadFile(path)
+	res, err := os.ReadFile(path) //nolint:gosec // This helper intentionally reads caller-provided paths.
 	if err != nil {
 		return "", fmt.Errorf("could not read file: %w", err)
 	}
@@ -31,11 +31,14 @@ func WriteFile[T string | []byte](path string, content T) error {
 // AppendToFile appends the given content to the given file.
 // Accepts a string or a byte slice.
 func AppendToFile[T string | []byte](path string, content T) error {
-	file, err := os.OpenFile(path, os.O_APPEND|os.O_WRONLY, 0o600)
+	file, err := os.OpenFile(path, os.O_APPEND|os.O_WRONLY, 0o600) //nolint:gosec // This helper intentionally opens caller-provided paths.
 	if err != nil {
 		return fmt.Errorf("could not open file: %w", err)
 	}
-	defer file.Close()
+
+	defer func() {
+		_ = file.Close()
+	}()
 
 	if _, err = file.Write([]byte(content)); err != nil {
 		return fmt.Errorf("could not write to file: %w", err)
@@ -53,17 +56,23 @@ func FileExists(path string) bool {
 // DownloadFile downloads the given URL to the given path.
 // If the file already exists, it will be overwritten.
 func DownloadFile(url, path string) error {
-	out, err := os.Create(path)
+	out, err := os.Create(path) //nolint:gosec // This helper intentionally writes caller-provided paths.
 	if err != nil {
 		return fmt.Errorf("could not create file: %w", err)
 	}
-	defer out.Close()
+
+	defer func() {
+		_ = out.Close()
+	}()
 
 	resp, err := http.Get(url) //nolint:gosec // wrapper function
 	if err != nil {
 		return fmt.Errorf("could not download file: %w", err)
 	}
-	defer resp.Body.Close()
+
+	defer func() {
+		_ = resp.Body.Close()
+	}()
 
 	if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("bad status: %s", resp.Status) //nolint: err113

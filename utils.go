@@ -41,7 +41,9 @@ func Fetch(url string) (string, error) {
 		return "", fmt.Errorf("failed to fetch URL: %w", err)
 	}
 
-	defer resp.Body.Close()
+	defer func() {
+		_ = resp.Body.Close()
+	}()
 
 	var buf bytes.Buffer
 
