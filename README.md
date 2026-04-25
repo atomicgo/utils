@@ -114,7 +114,7 @@ func AppendToFile[T string | []byte](path string, content T) error
 AppendToFile appends the given content to the given file. Accepts a string or a byte slice.
 
 <a name="DownloadFile"></a>
-## func [DownloadFile](<https://github.com/atomicgo/utils/blob/main/file.go#L55>)
+## func [DownloadFile](<https://github.com/atomicgo/utils/blob/main/file.go#L58>)
 
 ```go
 func DownloadFile(url, path string) error
@@ -132,7 +132,7 @@ func Fetch(url string) (string, error)
 Fetch returns the body of a GET request to the given URL.
 
 <a name="FileExists"></a>
-## func [FileExists](<https://github.com/atomicgo/utils/blob/main/file.go#L48>)
+## func [FileExists](<https://github.com/atomicgo/utils/blob/main/file.go#L51>)
 
 ```go
 func FileExists(path string) bool
@@ -225,7 +225,7 @@ b
 
 
 <a name="ToInt"></a>
-## func [ToInt](<https://github.com/atomicgo/utils/blob/main/to.go#L42>)
+## func [ToInt](<https://github.com/atomicgo/utils/blob/main/to.go#L43>)
 
 ```go
 func ToInt[T string | constraints.Number](value T) int
@@ -319,13 +319,13 @@ func main() {
 
 
 <a name="ToPrettyJSON"></a>
-## func [ToPrettyJSON](<https://github.com/atomicgo/utils/blob/main/to.go#L22>)
+## func [ToPrettyJSON](<https://github.com/atomicgo/utils/blob/main/to.go#L23>)
 
 ```go
 func ToPrettyJSON(v any, indent ...string) (string, error)
 ```
 
-
+ToPrettyJSON converts the given value to an indented JSON string.
 
 
 
@@ -365,7 +365,7 @@ func main() {
 
 
 <a name="ToString"></a>
-## func [ToString](<https://github.com/atomicgo/utils/blob/main/to.go#L36>)
+## func [ToString](<https://github.com/atomicgo/utils/blob/main/to.go#L37>)
 
 ```go
 func ToString(v any) string
